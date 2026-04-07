@@ -5,6 +5,9 @@ import { generateToken } from "../utils/jwt.js";
 export const register = async (req, res) => {
     try {
         const { name, email, password } = req.body;
+        if (!name || !email || !password) {
+            return res.status(400).json({ message: "name, email and password are required" });
+        }
 
         const existingUser = await User.findOne({ email });
         if (existingUser) {
@@ -19,7 +22,13 @@ export const register = async (req, res) => {
             password: hashed
         });
 
-        res.status(201).json({ message: "User registered successfully" });
+        res.status(201).json({ message: "User registered successfully", user: { 
+            id: user._id,
+            name: user.name,
+            email: user.email,
+            role: user.role
+         }
+        });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
@@ -28,6 +37,9 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
     try {
         const { email, password } = req.body;
+        if (!email || !password) {
+            return res.status(400).json({ message: "email and password are required" });
+        }
 
         const user = await User.findOne({ email });
         if (!user) {
@@ -40,7 +52,13 @@ export const login = async (req, res) => {
         }
 
         res.status(200).json({
-            token: generateToken(user)
+            token: generateToken(user),
+            user: {
+                id: user._id,
+                name: user.name,
+                email: user.email,
+                role: user.role
+            }
         });
     } catch (err) {
         res.status(500).json({ message: err.message });
