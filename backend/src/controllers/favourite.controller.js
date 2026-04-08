@@ -39,3 +39,22 @@ export const addToFavourites = async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 };
+
+export const removeFromFavourites = async (req, res) => {
+    try {
+        const { propertyId } = req.params;
+
+        if (!mongoose.Types.ObjectId.isValid(propertyId)) {
+            return res.status(400).json({ message: "Invalid Property ID format" });
+        }
+
+        const favourite = await Favourite.findOneAndDelete({ user: req.user.id, property: propertyId });
+        if (!favourite) {
+            return res.status(404).json({ message: "This property is not in your favorites" });
+        }
+
+        res.status(200).json({ message: "Property removed from favourites" });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
