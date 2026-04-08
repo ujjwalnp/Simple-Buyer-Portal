@@ -2,8 +2,7 @@ import { createBrowserRouter, Navigate } from "react-router-dom"
 import { getToken } from "../utils/cookie"
 import Login from "../pages/Login"
 import Register from "../pages/Register"
-
-const Dashboard = () => <h1>This is the DASHBOARD page</h1>
+import Dashboard from "../pages/Dashboard"
 
 const ProtectedRoute = ({ children }) => {
     return getToken() ? children : <Navigate to="/login" />
