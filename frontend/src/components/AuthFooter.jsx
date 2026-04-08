@@ -1,7 +1,7 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"
 
 export default function AuthFooter({ message, linkText, linkPath }) {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   return (
     <div className="mt-8 text-center text-stone-600">
@@ -13,5 +13,5 @@ export default function AuthFooter({ message, linkText, linkPath }) {
         {linkText}
       </button>
     </div>
-  );
+  )
 }

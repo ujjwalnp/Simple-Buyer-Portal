@@ -1,15 +1,15 @@
-import { useNavigate } from "react-router-dom";
-import { loginUser } from "../services/auth";
-import { setToken } from "../utils/cookie";
-import { useAuthForm } from "../hooks/useAuthForm";
-import AuthCard from "../components/AuthCard";
-import Input from "../components/Input";
-import SubmitButton from "../components/SubmitButton";
-import Alert from "../components/Alert";
-import AuthFooter from "../components/AuthFooter";
+import { useNavigate } from "react-router-dom"
+import { loginUser } from "../services/auth"
+import { setToken } from "../utils/cookie"
+import { useAuthForm } from "../hooks/useAuthForm"
+import AuthCard from "../components/AuthCard"
+import Input from "../components/Input"
+import SubmitButton from "../components/SubmitButton"
+import Alert from "../components/Alert"
+import AuthFooter from "../components/AuthFooter"
 
 export default function Login() {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const {
     form,
     errors,
@@ -23,32 +23,32 @@ export default function Login() {
     handleChange,
     handleBlur,
     validateFormFields,
-  } = useAuthForm({ email: "", password: "" });
+  } = useAuthForm({ email: "", password: "" })
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setServerError("");
-    setSuccess("");
+    e.preventDefault()
+    setServerError("")
+    setSuccess("")
 
     if (!validateFormFields(["email", "password"])) {
-      return;
+      return
     }
 
-    setLoading(true);
+    setLoading(true)
 
     try {
-      const res = await loginUser(form);
-      setToken(res.data.token);
-      setSuccess("Login successful! Redirecting...");
+      const res = await loginUser(form)
+      setToken(res.data.token)
+      setSuccess("Login successful! Redirecting...")
       setTimeout(() => {
-        navigate("/");
-      }, 1000);
+        navigate("/")
+      }, 1000)
     } catch (err) {
-      setServerError(err.response?.data?.message || "Login failed. Please check your credentials.");
+      setServerError(err.response?.data?.message || "Login failed. Please check your credentials.")
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
 
   return (
     <AuthCard title="Welcome Back" subtitle="Sign in to your account">
@@ -87,5 +87,5 @@ export default function Login() {
 
       <AuthFooter message="Don't have an account?" linkText="Create one" linkPath="/register" />
     </AuthCard>
-  );
+  )
 }

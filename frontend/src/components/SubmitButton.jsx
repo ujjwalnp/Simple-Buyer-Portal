@@ -7,5 +7,5 @@ export default function SubmitButton({ loading, loadingText, text }) {
     >
       {loading ? loadingText : text}
     </button>
-  );
+  )
 }

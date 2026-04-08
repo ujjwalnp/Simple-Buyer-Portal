@@ -1,14 +1,14 @@
-import { useNavigate } from "react-router-dom";
-import { registerUser } from "../services/auth";
-import { useAuthForm } from "../hooks/useAuthForm";
-import AuthCard from "../components/AuthCard";
-import Input from "../components/Input";
-import SubmitButton from "../components/SubmitButton";
-import Alert from "../components/Alert";
-import AuthFooter from "../components/AuthFooter";
+import { useNavigate } from "react-router-dom"
+import { registerUser } from "../services/auth"
+import { useAuthForm } from "../hooks/useAuthForm"
+import AuthCard from "../components/AuthCard"
+import Input from "../components/Input"
+import SubmitButton from "../components/SubmitButton"
+import Alert from "../components/Alert"
+import AuthFooter from "../components/AuthFooter"
 
 export default function Register() {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const {
     form,
     errors,
@@ -22,31 +22,31 @@ export default function Register() {
     handleChange,
     handleBlur,
     validateFormFields,
-  } = useAuthForm({ name: "", email: "", password: "" });
+  } = useAuthForm({ name: "", email: "", password: "" })
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setServerError("");
-    setSuccess("");
+    e.preventDefault()
+    setServerError("")
+    setSuccess("")
 
     if (!validateFormFields(["name", "email", "password"])) {
-      return;
+      return
     }
 
-    setLoading(true);
+    setLoading(true)
 
     try {
-      await registerUser(form);
-      setSuccess("Registration successful! Redirecting to login...");
+      await registerUser(form)
+      setSuccess("Registration successful! Redirecting to login...")
       setTimeout(() => {
-        navigate("/login");
-      }, 1500);
+        navigate("/login")
+      }, 1500)
     } catch (err) {
-      setServerError(err.response?.data?.message || "Registration failed. Please try again.");
+      setServerError(err.response?.data?.message || "Registration failed. Please try again.")
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
 
   return (
     <AuthCard title="Create Account" subtitle="Sign up to get started">
@@ -98,5 +98,5 @@ export default function Register() {
 
       <AuthFooter message="Already have an account?" linkText="Sign in" linkPath="/login" />
     </AuthCard>
-  );
+  )
 }

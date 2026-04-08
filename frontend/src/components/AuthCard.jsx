@@ -9,5 +9,5 @@ export default function AuthCard({ title, subtitle, children }) {
         {children}
       </div>
     </div>
-  );
+  )
 }
