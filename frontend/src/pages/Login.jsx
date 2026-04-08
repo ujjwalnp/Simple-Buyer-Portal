@@ -85,7 +85,7 @@ export default function Login() {
         <SubmitButton loading={loading} loadingText="Signing in..." text="Login" />
       </form>
 
-      <AuthFooter message="Don't have an account?" linkText="Create one" linkPath="/register" />
+      <AuthFooter message="Don't have an account?" linkText="Register An Account" linkPath="/register" />
     </AuthCard>
   )
 }
