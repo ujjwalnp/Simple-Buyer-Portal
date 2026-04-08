@@ -1,8 +1,8 @@
 import { createBrowserRouter, Navigate } from "react-router-dom"
 import { getToken } from "../utils/cookie"
+import Login from "../pages/Login"
+import Register from "../pages/Register"
 
-const Register = () => <h1>This is the REGISTER page</h1>
-const Login = () => <h1>This is the LOGIN page</h1>
 const Dashboard = () => <h1>This is the DASHBOARD page</h1>
 
 const ProtectedRoute = ({ children }) => {
